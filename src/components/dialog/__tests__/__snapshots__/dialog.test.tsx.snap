@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Screen Matches Snapshot 1`] = `
+<withTheme(Portal)>
+  <withTheme(Dialog)
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#313136",
+      }
+    }
+    visible={true}
+  >
+    <withTheme(Dialog.Title)
+      style={
+        Object {
+          "color": "#FFF",
+        }
+      }
+    >
+      Simple dialog
+    </withTheme(Dialog.Title)>
+    <Dialog.Content>
+      <Paragraph
+        style={
+          Object {
+            "color": "#FFF",
+          }
+        }
+      >
+        Dialog text
+      </Paragraph>
+    </Dialog.Content>
+    <Dialog.Actions>
+      <withTheme(Button)
+        color="#FFF"
+        id="cancelButton"
+        onPress={[Function]}
+      >
+        cancel
+      </withTheme(Button)>
+      <withTheme(Button)
+        color="#FFF"
+        id="okButton"
+        onPress={[Function]}
+      >
+        ok
+      </withTheme(Button)>
+    </Dialog.Actions>
+  </withTheme(Dialog)>
+</withTheme(Portal)>
+`;
