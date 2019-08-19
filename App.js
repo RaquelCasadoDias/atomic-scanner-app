@@ -10,15 +10,15 @@ const AppContainer = createAppContainer(AppNavigator);
 const store = getStore();
 
 export default App = () => {
-    return (
-        <Provider store={store}>
-            <PaperProvider>
-                <AppContainer
-                    ref={navigatorRef => {
-                        NavigationService.setTopLevelNavigator(navigatorRef);
-                    }}
-                />
-            </PaperProvider>
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <PaperProvider>
+        <AppContainer
+          ref={navigatorRef => {
+            NavigationService.setTopLevelNavigator(navigatorRef);
+          }}
+        />
+      </PaperProvider>
+    </Provider>
+  );
 };
