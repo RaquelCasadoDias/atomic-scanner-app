@@ -19,66 +19,23 @@ exports[`Home Screen Matches Snapshot 1`] = `
       }
     }
   >
-    <RNGestureHandlerButton
-      collapsable={false}
-      onGestureEvent={[Function]}
-      onGestureHandlerEvent={[Function]}
-      onGestureHandlerStateChange={[Function]}
-      onHandlerStateChange={[Function]}
-      rippleColor={0}
-      style={
-        Array [
-          Object {
-            "overflow": "hidden",
-          },
-          undefined,
-        ]
-      }
-    >
-      <View
-        accessible={true}
-        style={Object {}}
-      >
-        <Image
-          source={
-            Object {
-              "testUri": "../../../assets/images/scanButton.png",
-            }
-          }
-          style={
-            Object {
-              "height": 100,
-              "width": 200,
-            }
-          }
-        />
-      </View>
-    </RNGestureHandlerButton>
-  </View>
-  <RNGestureHandlerButton
-    collapsable={false}
-    onGestureEvent={[Function]}
-    onGestureHandlerEvent={[Function]}
-    onGestureHandlerStateChange={[Function]}
-    onHandlerStateChange={[Function]}
-    rippleColor={0}
-    style={
-      Array [
-        Object {
-          "overflow": "hidden",
-        },
-        undefined,
-      ]
-    }
-  >
     <View
       accessible={true}
-      style={Object {}}
+      clickable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={null}
     >
       <Image
         source={
           Object {
-            "testUri": "../../../assets/images/photoGalleryButton.png",
+            "testUri": "../../../assets/images/scanButton.png",
           }
         }
         style={
@@ -89,6 +46,33 @@ exports[`Home Screen Matches Snapshot 1`] = `
         }
       />
     </View>
-  </RNGestureHandlerButton>
+  </View>
+  <View
+    accessible={true}
+    clickable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={null}
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../assets/images/photoGalleryButton.png",
+        }
+      }
+      style={
+        Object {
+          "height": 100,
+          "width": 200,
+        }
+      }
+    />
+  </View>
 </View>
 `;

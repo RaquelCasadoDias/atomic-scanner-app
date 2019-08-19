@@ -1,7 +1,13 @@
 import React from 'react';
-import {View, StyleSheet, Image} from 'react-native';
-import {TouchableHighlight} from 'react-native-gesture-handler';
+import {View, StyleSheet, Image, TouchableHighlight} from 'react-native';
 import {theme} from '../../theme';
+import {Dispatch} from 'redux';
+import {scanStarted} from '../scanner/actions';
+import {connect} from 'react-redux';
+import {navigate} from '../../services/navigation/navigationService';
+import AtomicDialog from '../../components/dialog/dialog';
+import {QRCodeNotification} from '../scanner/actionTypes';
+import {clearNotification} from '../../services/notification/actions';
 
 const styles = StyleSheet.create({
   container: {
@@ -24,29 +30,80 @@ const styles = StyleSheet.create({
   },
 });
 
-export class HomeScreen extends React.Component {
+interface HomeProps {
+  notificationService: {
+    notification: QRCodeNotification;
+    visible: boolean;
+  };
+  dispatchClearNotification: () => void;
+  dispatchScannerRequest: (data: string) => void;
+}
+
+export class Home extends React.Component<{}, HomeProps> {
   static navigationOptions = {
     header: null,
   };
 
+  navigateToScanner = () => {
+    navigate('Scanner', {});
+  };
+
+  onCancel = () => {
+    this.props.dispatchClearNotification();
+  };
+
+  onOk = () => {
+    Linking.openURL(this.props.notificationService.notification.text)
+      .catch(err => console.error('An error occured', err))
+      .then(this.props.dispatchClearNotification());
+  };
+
   render() {
+    const {notificationService} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.scanButtonView}>
-          <TouchableHighlight onPress={() => {}}>
+          <TouchableHighlight
+            id={'ScanButton'}
+            onPress={this.navigateToScanner}>
             <Image
               style={styles.scanButton}
               source={require('../../../assets/images/scanButton.png')}
             />
           </TouchableHighlight>
         </View>
-        <TouchableHighlight onPress={() => {}}>
+        <TouchableHighlight id={'PhotoGalleryButton'} onPress={() => {}}>
           <Image
             style={styles.photoGalleryButton}
             source={require('../../../assets/images/photoGalleryButton.png')}
           />
         </TouchableHighlight>
+        <AtomicDialog
+          title={notificationService.notification.title}
+          text={notificationService.notification.text}
+          cancelText={notificationService.notification.cancel}
+          okText={notificationService.notification.ok}
+          cancelAction={this.onCancel}
+          okAction={this.onOk}
+          visible={notificationService.visible}
+        />
       </View>
     );
   }
 }
+
+function mapStateToProps(state: any) {
+  return {notificationService: state.notification};
+}
+
+function mapDispatchToProps(dispatch: Dispatch) {
+  return {
+    dispatchClearNotification: () => dispatch(clearNotification()),
+    dispatchScannerRequest: (data: string) => dispatch(scanStarted(data)),
+  };
+}
+
+export const HomeScreen = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Home);

@@ -1,14 +1,8 @@
 import {combineReducers} from 'redux';
-
-const initialState = {};
-
-function todoApp(state = initialState, action) {
-  switch (action.type) {
-    default:
-      return state;
-  }
-}
+import scanReducer from './screens/scanner/reducer';
+import {notificationReducer} from './services/notification/reducer';
 
 export default combineReducers({
-  todoApp,
+  scanner: scanReducer,
+  notification: notificationReducer,
 });

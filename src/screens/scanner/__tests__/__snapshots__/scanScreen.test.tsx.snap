@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Scanner screen Matches Snapshot 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 2,
+          "justifyContent": "center",
+          "width": 750,
+        },
+        undefined,
+      ]
+    }
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      ...
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 2,
+          "justifyContent": "center",
+          "width": 750,
+        },
+        undefined,
+      ]
+    }
+  />
+</View>
+`;
