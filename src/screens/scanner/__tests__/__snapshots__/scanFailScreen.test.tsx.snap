@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Scan fail Screen Matches Snapshot 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#313136",
+      "flex": 1,
+      "padding": 30,
+    }
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "Helvetica Neue",
+          "textAlign": "left",
+          "writingDirection": "ltr",
+        },
+        Object {
+          "color": "#009688",
+        },
+      ]
+    }
+  >
+    Dude! Help me to help you! Go back and give me permission to access your camera
+  </Text>
+</View>
+`;

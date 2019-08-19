@@ -27,7 +27,11 @@ target 'atomicScannerApp' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
+  pod 'ReactNativePermissions', :path => '../node_modules/react-native-permissions'
+
+
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
   target 'atomicScannerAppTests' do
     inherit! :search_paths
