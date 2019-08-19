@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Screen Matches Snapshot 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#313136",
+      "flex": 1,
+      "padding": 30,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "marginBottom": 30,
+        "marginTop": 150,
+      }
+    }
+  >
+    <RNGestureHandlerButton
+      collapsable={false}
+      onGestureEvent={[Function]}
+      onGestureHandlerEvent={[Function]}
+      onGestureHandlerStateChange={[Function]}
+      onHandlerStateChange={[Function]}
+      rippleColor={0}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        accessible={true}
+        style={Object {}}
+      >
+        <Image
+          source={
+            Object {
+              "testUri": "../../../assets/images/scanButton.png",
+            }
+          }
+          style={
+            Object {
+              "height": 100,
+              "width": 200,
+            }
+          }
+        />
+      </View>
+    </RNGestureHandlerButton>
+  </View>
+  <RNGestureHandlerButton
+    collapsable={false}
+    onGestureEvent={[Function]}
+    onGestureHandlerEvent={[Function]}
+    onGestureHandlerStateChange={[Function]}
+    onHandlerStateChange={[Function]}
+    rippleColor={0}
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      style={Object {}}
+    >
+      <Image
+        source={
+          Object {
+            "testUri": "../../../assets/images/photoGalleryButton.png",
+          }
+        }
+        style={
+          Object {
+            "height": 100,
+            "width": 200,
+          }
+        }
+      />
+    </View>
+  </RNGestureHandlerButton>
+</View>
+`;
