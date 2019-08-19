@@ -18,7 +18,7 @@ jest.mock('NativeModules', () => ({
 
 jest.mock('react-native-permissions', () => ({
   check: _ => Promise.resolve(true),
-  request: _ => Promise.resolve(true)
+  request: _ => Promise.resolve(true),
 }));
 
 jest.mock('./src/services/navigation/navigationService', () => {
@@ -27,3 +27,7 @@ jest.mock('./src/services/navigation/navigationService', () => {
     setTopLevelNavigator: jest.fn(),
   };
 });
+
+jest.mock('react-native-image-picker', () => ({
+  launchImageLibrary: jest.fn()
+}));

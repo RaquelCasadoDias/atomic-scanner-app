@@ -1,5 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, Image, TouchableHighlight} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  TouchableHighlight,
+  Linking,
+} from 'react-native';
 import {theme} from '../../theme';
 import {Dispatch} from 'redux';
 import {scanStarted} from '../scanner/actions';
@@ -8,6 +14,8 @@ import {navigate} from '../../services/navigation/navigationService';
 import AtomicDialog from '../../components/dialog/dialog';
 import {QRCodeNotification} from '../scanner/actionTypes';
 import {clearNotification} from '../../services/notification/actions';
+import QRCode from '@remobile/react-native-qrcode-local-image';
+import ImagePicker from 'react-native-image-picker';
 
 const styles = StyleSheet.create({
   container: {
@@ -44,8 +52,40 @@ export class Home extends React.Component<{}, HomeProps> {
     header: null,
   };
 
+  state = {
+    ScanResult: {error: '', result: ''},
+  };
+
   navigateToScanner = () => {
     navigate('Scanner', {});
+  };
+
+  scanFromPhotoGallery = async () => {
+    this.pickImage();
+  };
+
+  pickImage = () => {
+    ImagePicker.launchImageLibrary({title: 'Select Photo'}, response => {
+      console.log('Response = ', response);
+      let source;
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        source = response.path;
+        console.log('source', source);
+        QRCode.decode(source, (error: string, result: string) => {
+          this.setState({ScanResult: {error, result}});
+          if (this.state.ScanResult.result !== '') {
+            this.props.dispatchScannerRequest(this.state.ScanResult.result);
+          }
+        });
+      }
+    });
   };
 
   onCancel = () => {
@@ -72,7 +112,9 @@ export class Home extends React.Component<{}, HomeProps> {
             />
           </TouchableHighlight>
         </View>
-        <TouchableHighlight id={'PhotoGalleryButton'} onPress={() => {}}>
+        <TouchableHighlight
+          id={'PhotoGalleryButton'}
+          onPress={this.scanFromPhotoGallery}>
           <Image
             style={styles.photoGalleryButton}
             source={require('../../../assets/images/photoGalleryButton.png')}
