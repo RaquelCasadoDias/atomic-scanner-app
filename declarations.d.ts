@@ -1,0 +1,13 @@
+// declare module 'react';
+declare module 'react-native';
+declare module 'jest';
+declare module 'react-test-renderer';
+declare module 'redux-saga';
+declare module 'react-native-camera';
+declare module 'react-redux';
+declare module 'redux-saga-test-plan';
+declare module 'react-native-paper';
+declare module '@react-native-community/async-storage/jest/async-storage-mock';
+declare module 'enzyme';
+declare module 'enzyme-adapter-react-16';
+declare module '@remobile/react-native-qrcode-local-image';

@@ -1,8 +1,8 @@
 import {shallow} from 'enzyme';
 import React from 'react';
-import AtomicDialog from '../dialog';
-import ShallowRenderer from 'react-test-renderer/shallow';
 import {Button, Dialog, Paragraph} from 'react-native-paper';
+import ShallowRenderer from 'react-test-renderer/shallow';
+import AtomicDialog from '../dialog';
 
 describe('Home Screen', () => {
   const cancelMock = jest.fn();

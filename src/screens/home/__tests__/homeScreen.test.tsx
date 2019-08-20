@@ -1,3 +1,5 @@
+import {notificationType} from '../../scanner/actionTypes';
+
 jest.mock('../../../services/scanner/scannerService', () => {
   return {
     pickImage: jest.fn(),
@@ -5,16 +7,18 @@ jest.mock('../../../services/scanner/scannerService', () => {
 });
 
 import React from 'react';
-import ReactTestRenderer from 'react-test-renderer';
-import {Home} from '../homeScreen';
-import {navigate} from '../../../services/navigation/navigationService';
 import {TouchableHighlight} from 'react-native';
+import {Snackbar} from 'react-native-paper';
+import ReactTestRenderer from 'react-test-renderer';
 import AtomicDialog from '../../../components/dialog/dialog';
+import {navigate} from '../../../services/navigation/navigationService';
 import {pickImage} from '../../../services/scanner/scannerService';
+import {Home} from '../homeScreen';
 
 describe('Home Screen', () => {
   const notificationService = {
     notification: {
+      type: notificationType.DIALOG,
       title: 'dummy title',
       text: 'dummy text',
       ok: 'ok',
@@ -22,8 +26,12 @@ describe('Home Screen', () => {
     },
     visible: true,
   };
-  const render = ReactTestRenderer.create(
-    <Home notificationService={notificationService} />,
+  let render = ReactTestRenderer.create(
+    <Home
+      notificationService={notificationService}
+      dispatchClearNotification={jest.fn()}
+      dispatchScannerRequest={jest.fn()}
+    />,
   );
 
   it('Matches Snapshot', () => {
@@ -53,5 +61,25 @@ describe('Home Screen', () => {
     expect(dialog.cancelText).toBe('cancel');
     expect(dialog.okText).toBe('ok');
     expect(dialog.visible).toBeTruthy();
+  });
+
+  it('Displays snackbar with props from notification', () => {
+    const error_notificationService = {
+      notification: {
+        type: notificationType.SNACKBAR,
+        text: 'dummy text',
+      },
+      visible: true,
+    };
+    render = ReactTestRenderer.create(
+      <Home
+        notificationService={error_notificationService}
+        dispatchClearNotification={jest.fn()}
+        dispatchScannerRequest={jest.fn()}
+      />,
+    );
+    const snackbar = render.root.findByType(Snackbar).instance.props;
+    expect(snackbar.visible).toBeTruthy();
+    expect(snackbar.children).toBe('dummy text');
   });
 });

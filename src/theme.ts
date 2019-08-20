@@ -6,6 +6,7 @@ interface Theme {
     blue: string;
     green: string;
     white: string;
+    red: string;
   };
 }
 
@@ -16,5 +17,6 @@ export const theme: Theme = {
     blue: '#607D8B',
     green: '#009688',
     white: '#FFF',
+    red: '#8D021F',
   },
 };

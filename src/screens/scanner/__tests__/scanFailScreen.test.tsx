@@ -1,6 +1,6 @@
-import {FailScreen} from '../scanFailScreen';
-import ReactTestRenderer from 'react-test-renderer';
 import React from 'react';
+import ReactTestRenderer from 'react-test-renderer';
+import {FailScreen} from '../scanFailScreen';
 
 describe('Scan fail Screen', () => {
   const render = ReactTestRenderer.create(<FailScreen />);
