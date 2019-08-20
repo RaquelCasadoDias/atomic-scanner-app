@@ -29,5 +29,5 @@ jest.mock('./src/services/navigation/navigationService', () => {
 });
 
 jest.mock('react-native-image-picker', () => ({
-  launchImageLibrary: jest.fn()
+  launchImageLibrary: jest.fn(),
 }));

@@ -14,8 +14,7 @@ import {navigate} from '../../services/navigation/navigationService';
 import AtomicDialog from '../../components/dialog/dialog';
 import {QRCodeNotification} from '../scanner/actionTypes';
 import {clearNotification} from '../../services/notification/actions';
-import QRCode from '@remobile/react-native-qrcode-local-image';
-import ImagePicker from 'react-native-image-picker';
+import {pickImage} from '../../services/scanner/scannerService';
 
 const styles = StyleSheet.create({
   container: {
@@ -47,13 +46,9 @@ interface HomeProps {
   dispatchScannerRequest: (data: string) => void;
 }
 
-export class Home extends React.Component<{}, HomeProps> {
+export class Home extends React.Component<HomeProps> {
   static navigationOptions = {
     header: null,
-  };
-
-  state = {
-    ScanResult: {error: '', result: ''},
   };
 
   navigateToScanner = () => {
@@ -61,31 +56,9 @@ export class Home extends React.Component<{}, HomeProps> {
   };
 
   scanFromPhotoGallery = async () => {
-    this.pickImage();
-  };
-
-  pickImage = () => {
-    ImagePicker.launchImageLibrary({title: 'Select Photo'}, response => {
-      console.log('Response = ', response);
-      let source;
-
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        source = response.path;
-        console.log('source', source);
-        QRCode.decode(source, (error: string, result: string) => {
-          this.setState({ScanResult: {error, result}});
-          if (this.state.ScanResult.result !== '') {
-            this.props.dispatchScannerRequest(this.state.ScanResult.result);
-          }
-        });
-      }
-    });
+    pickImage().then(result =>
+      this.props.dispatchScannerRequest(result.result),
+    );
   };
 
   onCancel = () => {
