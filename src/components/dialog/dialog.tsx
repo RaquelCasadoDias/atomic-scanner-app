@@ -29,10 +29,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class AtomicDialog extends React.Component<
-  {},
-  AtomicDialogProps
-> {
+export default class AtomicDialog extends React.Component<AtomicDialogProps> {
   _cancelAction = () => {
     this.props.cancelAction();
   };

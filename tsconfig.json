@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "paths": { "*": ["types/*"] },
+    "target": "es2017",
+    "lib": ["es2017", "esnext.asynciterable"],
+    "outDir": "tsc-out",
+    "module": "commonjs",
+    "jsx": "react",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "types": ["jest", "node"],
+    "baseUrl": ".",
+    "skipLibCheck": true
+    // fix for duplicate identifier
+  }
+}

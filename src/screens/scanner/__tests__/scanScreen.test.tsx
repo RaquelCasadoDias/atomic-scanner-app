@@ -1,7 +1,7 @@
 import React from 'react';
-import {Scanner} from '../scanScreen';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import ReactTestRenderer from 'react-test-renderer';
+import {Scanner} from '../scanScreen';
 
 describe('Scanner screen', () => {
   const dispatchScannerRequestMock = jest.fn();
