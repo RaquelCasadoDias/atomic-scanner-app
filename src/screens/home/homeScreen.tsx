@@ -1,5 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, Image, TouchableHighlight} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  TouchableHighlight,
+  Linking,
+} from 'react-native';
 import {theme} from '../../theme';
 import {Dispatch} from 'redux';
 import {scanStarted} from '../scanner/actions';
@@ -8,6 +14,7 @@ import {navigate} from '../../services/navigation/navigationService';
 import AtomicDialog from '../../components/dialog/dialog';
 import {QRCodeNotification} from '../scanner/actionTypes';
 import {clearNotification} from '../../services/notification/actions';
+import {pickImage} from '../../services/scanner/scannerService';
 
 const styles = StyleSheet.create({
   container: {
@@ -39,13 +46,19 @@ interface HomeProps {
   dispatchScannerRequest: (data: string) => void;
 }
 
-export class Home extends React.Component<{}, HomeProps> {
+export class Home extends React.Component<HomeProps> {
   static navigationOptions = {
     header: null,
   };
 
   navigateToScanner = () => {
     navigate('Scanner', {});
+  };
+
+  scanFromPhotoGallery = async () => {
+    pickImage().then(result =>
+      this.props.dispatchScannerRequest(result.result),
+    );
   };
 
   onCancel = () => {
@@ -72,7 +85,9 @@ export class Home extends React.Component<{}, HomeProps> {
             />
           </TouchableHighlight>
         </View>
-        <TouchableHighlight id={'PhotoGalleryButton'} onPress={() => {}}>
+        <TouchableHighlight
+          id={'PhotoGalleryButton'}
+          onPress={this.scanFromPhotoGallery}>
           <Image
             style={styles.photoGalleryButton}
             source={require('../../../assets/images/photoGalleryButton.png')}

@@ -9,7 +9,7 @@ interface ScannerProps {
   dispatchScannerRequest: (data: string) => void;
 }
 
-export class Scanner extends React.Component<{}, ScannerProps> {
+export class Scanner extends React.Component<ScannerProps> {
   static navigationOptions = {
     header: null,
   };

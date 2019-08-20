@@ -193,6 +193,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation project(':react-native-camera')
+    compile project(':react-native-qrcode-local-image')
 
     if (enableHermes) {
       def hermesPath = "../../node_modules/hermesvm/android/";
