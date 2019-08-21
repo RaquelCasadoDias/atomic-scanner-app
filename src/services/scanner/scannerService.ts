@@ -2,11 +2,10 @@ import QRCode from '@remobile/react-native-qrcode-local-image';
 import ImagePicker from 'react-native-image-picker';
 
 export function pickImage(): Promise<{error: string; result: any}> {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     ImagePicker.launchImageLibrary({title: 'Select Photo'}, response => {
       console.log('Response = ', response);
       let source;
-
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else if (response.error) {

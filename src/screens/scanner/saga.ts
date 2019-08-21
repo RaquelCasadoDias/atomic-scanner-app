@@ -25,14 +25,16 @@ export function* scanWorker(action: AnyAction) {
         ok: 'Visite website',
         cancel: 'Cancel',
       };
+      yield put(storeNotification(notification));
     } else {
       notification = {
         type: notificationType.SNACKBAR,
         text: 'Something went wrong. Please try again',
       };
+
+      yield put(scanFailed('Fail to read data'));
     }
     yield put(storeNotification(notification));
-    yield put(scanFailed('Fail to read data'));
   } catch (e) {
     const notification: SnackbarNotification = {
       type: notificationType.SNACKBAR,
