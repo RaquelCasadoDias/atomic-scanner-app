@@ -11,7 +11,11 @@ import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 import AtomicDialog from '../../components/dialog/dialog';
 import {navigate} from '../../services/navigation/navigationService';
-import {clearNotification} from '../../services/notification/actions';
+import {
+  clearNotification,
+  storeNotification,
+} from '../../services/notification/actions';
+import {requestPermission} from '../../services/permissions/permissions';
 import {pickImage} from '../../services/scanner/scannerService';
 import {theme} from '../../theme';
 import {scanStarted} from '../scanner/actions';
@@ -50,6 +54,7 @@ interface HomeProps {
     notification: QRCodeNotification | SnackbarNotification;
     visible: boolean;
   };
+  dispatchNotification: (notification: SnackbarNotification) => void;
   dispatchClearNotification: () => void;
   dispatchScannerRequest: (data: string) => void;
 }
@@ -59,14 +64,43 @@ export class Home extends React.Component<HomeProps> {
     header: null,
   };
 
-  navigateToScanner = () => {
-    navigate('Scanner', {});
+  scanFromCamera = async () => {
+    const permission = await requestPermission(['CAMERA']);
+    if (permission === 'granted') {
+      navigate('Scanner', {});
+    } else if (permission === 'denied') {
+      this.props.dispatchNotification({
+        type: notificationType.SNACKBAR,
+        text: 'Please grant permission to continue',
+      });
+    } else {
+      this.props.dispatchNotification({
+        type: notificationType.SNACKBAR,
+        text: 'Something went wrong. Try again',
+      });
+    }
   };
 
   scanFromPhotoGallery = async () => {
-    pickImage().then(result =>
-      this.props.dispatchScannerRequest(result.result),
-    );
+    const permission = await requestPermission([
+      'READ_EXTERNAL_STORAGE',
+      'CAMERA',
+    ]);
+    if (permission === 'granted') {
+      pickImage().then(result =>
+        this.props.dispatchScannerRequest(result.result),
+      );
+    } else if (permission === 'denied') {
+      this.props.dispatchNotification({
+        type: notificationType.SNACKBAR,
+        text: 'Please grant permission to continue',
+      });
+    } else {
+      this.props.dispatchNotification({
+        type: notificationType.SNACKBAR,
+        text: 'Something went wrong. Try again',
+      });
+    }
   };
 
   onCancel = () => {
@@ -84,9 +118,7 @@ export class Home extends React.Component<HomeProps> {
     return (
       <View style={styles.container}>
         <View style={styles.scanButtonView}>
-          <TouchableHighlight
-            id={'ScanButton'}
-            onPress={this.navigateToScanner}>
+          <TouchableHighlight id={'ScanButton'} onPress={this.scanFromCamera}>
             <Image
               style={styles.scanButton}
               source={require('../../../assets/images/scanButton.png')}
@@ -153,6 +185,8 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: Dispatch) {
   return {
+    dispatchNotification: (notification: SnackbarNotification) =>
+      dispatch(storeNotification(notification)),
     dispatchClearNotification: () => dispatch(clearNotification()),
     dispatchScannerRequest: (data: string) => dispatch(scanStarted(data)),
   };
