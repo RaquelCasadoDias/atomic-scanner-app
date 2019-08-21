@@ -7,7 +7,10 @@ export async function requestPermission(types: any[]) {
       permissions.push(PermissionsAndroid.PERMISSIONS[type]);
     }
     const granted = await PermissionsAndroid.requestMultiple(permissions);
-    if (Object.values(granted).includes('denied' || 'never_ask_again')) {
+    if (
+      Object.values(granted).includes('denied') ||
+      Object.values(granted).includes('never_ask_again')
+    ) {
       return 'denied';
     }
     return 'granted';
